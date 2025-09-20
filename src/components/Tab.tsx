@@ -1,0 +1,109 @@
+import { Icon } from './Icon';
+
+interface TabProps {
+  tab: chrome.tabs.Tab;
+  isActive: boolean;
+  onClick: (tabId: number | undefined) => void;
+  onClose: (tabId: number | undefined) => void;
+  highlightText?: (text: string, query: string) => any;
+  searchQuery?: string;
+  className?: string;
+}
+
+function getCustomFavicon(url: string | undefined): string | null {
+  if (!url) return null;
+
+  if (url.startsWith('chrome://extensions')) {
+    return 'icons/chrome_extensions.png';
+  }
+
+  if (url.startsWith('chrome://settings')) {
+    return 'icons/chrome_settings.png';
+  }
+
+  return null;
+}
+
+export function Tab({
+  tab,
+  isActive,
+  onClick,
+  onClose,
+  highlightText,
+  searchQuery,
+  className = ''
+}: TabProps) {
+  const customFavicon = getCustomFavicon(tab.url);
+
+  return (
+    <div
+      className={`group flex items-center px-3 py-2 transition-colors cursor-pointer w-full max-w-full overflow-hidden ${isActive
+          ? 'bg-gray-200'
+          : 'hover:bg-gray-100'
+        } ${className}`}
+      onClick={(e) => {
+        e.stopPropagation();
+        onClick(tab.id);
+      }}
+    >
+      <div className="flex items-center flex-grow min-w-0">
+        {/* Favicon */}
+        <div className="flex-shrink-0 w-4 h-4 mr-2 mt-0.5">
+          {customFavicon ? (
+            <img
+              src={customFavicon}
+              className="w-full h-full object-contain"
+              alt=""
+            />
+          ) : tab.favIconUrl ? (
+            <img
+              src={tab.favIconUrl}
+              className="w-full h-full object-contain"
+              alt=""
+              onError={(e) => {
+                e.currentTarget.src = 'icons/globe16.png';
+                e.currentTarget.onerror = null;
+              }}
+            />
+          ) : (
+            <img
+              src="icons/globe16.png"
+              className="w-full h-full object-contain"
+              alt=""
+            />
+          )}
+        </div>
+
+        {/* Tab Info */}
+        <div className="flex-grow min-w-0">
+          {/* Tab Title */}
+          <div className="truncate text-sm text-gray-700 font-medium">
+            {highlightText && searchQuery ? highlightText(tab.title || '', searchQuery) : tab.title}
+          </div>
+
+          {/* URL - Show when searching */}
+          {searchQuery && searchQuery.trim() && (
+            <div className="truncate text-xs text-gray-500 mt-0.5">
+              {highlightText ? highlightText(tab.url || '', searchQuery) : tab.url}
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Close Button */}
+      <div className="flex-shrink-0 ml-2 opacity-0 group-hover:opacity-100 transition-opacity">
+        <Icon
+          name="close"
+          size={16}
+          tooltip="탭 닫기"
+          tooltipPosition="top"
+          onClick={(e) => {
+            e.stopPropagation();
+            onClose(tab.id);
+          }}
+          className="opacity-70 hover:opacity-100 hover:bg-gray-200 rounded-full p-1 cursor-pointer transition-all"
+        />
+      </div>
+    </div>
+  );
+}
