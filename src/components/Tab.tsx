@@ -1,4 +1,5 @@
 import { Icon } from './Icon';
+import { useState, useEffect } from 'react';
 
 interface TabProps {
   tab: chrome.tabs.Tab;
@@ -10,18 +11,9 @@ interface TabProps {
   className?: string;
 }
 
-function getCustomFavicon(url: string | undefined): string | null {
-  if (!url) return null;
-
-  if (url.startsWith('chrome://extensions')) {
-    return 'icons/chrome_extensions.png';
-  }
-
-  if (url.startsWith('chrome://settings')) {
-    return 'icons/chrome_settings.png';
-  }
-
-  return null;
+function getExtensionId(url: string): string | null {
+  const match = url.match(/chrome-extension:\/\/([a-z]+)/);
+  return match ? match[1] : null;
 }
 
 export function Tab({
@@ -33,7 +25,17 @@ export function Tab({
   searchQuery,
   className = ''
 }: TabProps) {
-  const customFavicon = getCustomFavicon(tab.url);
+  const [extensionIcon, setExtensionIcon] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (tab.url?.startsWith('chrome-extension://') && !tab.favIconUrl) {
+      const extensionId = getExtensionId(tab.url);
+      if (extensionId) {
+        const chromeIconUrl = `chrome://extension-icon/${extensionId}/16/0`;
+        setExtensionIcon(chromeIconUrl);
+      }
+    }
+  }, [tab.url, tab.favIconUrl]);
 
   return (
     <div
@@ -49,11 +51,15 @@ export function Tab({
       <div className="flex items-center flex-grow min-w-0">
         {/* Favicon */}
         <div className="flex-shrink-0 w-4 h-4 mr-2 mt-0.5">
-          {customFavicon ? (
+          {extensionIcon ? (
             <img
-              src={customFavicon}
+              src={extensionIcon}
               className="w-full h-full object-contain"
               alt=""
+              onError={(e) => {
+                e.currentTarget.src = 'icons/globe16.png';
+                e.currentTarget.onerror = null;
+              }}
             />
           ) : tab.favIconUrl ? (
             <img

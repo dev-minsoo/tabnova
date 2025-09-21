@@ -136,6 +136,8 @@ function SidePanel() {
   const handleSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && !e.nativeEvent.isComposing) {
       handleNewTabSearch();
+    } else if (e.key === 'Escape') {
+      setSearchQuery('');
     }
   };
 

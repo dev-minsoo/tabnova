@@ -6,7 +6,8 @@
   "permissions": [
     "sidePanel",
     "tabs",
-    "contextMenus"
+    "contextMenus",
+    "management"
   ],
   "icons": {
     "16": "icons/logo16.png",
