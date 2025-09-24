@@ -1,25 +1,15 @@
 import { useState, useEffect } from 'react';
-import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
-import { arrayMove, SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from '@dnd-kit/sortable';
-import { SortableItem } from '../../components/SortableItem';
-import { Icon } from '../../components/Icon';
+import { arrayMove } from '@dnd-kit/sortable';
+import { Header } from '../../components/Header';
+import { Body } from '../../components/Body';
+import { Footer } from '../../components/Footer';
 
 function SidePanel() {
   const [tabs, setTabs] = useState<chrome.tabs.Tab[]>([]);
   const [activeTabId, setActiveTabId] = useState<number>();
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [filteredTabs, setFilteredTabs] = useState<chrome.tabs.Tab[]>([]);
-
-  const sensors = useSensors(
-    useSensor(PointerSensor, {
-      activationConstraint: {
-        distance: 8,
-      },
-    }),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    })
-  );
+  const [currentTab, setCurrentTab] = useState<'tabs' | 'bookmark' | 'history' | 'settings'>('tabs');
 
   useEffect(() => {
     const loadTabs = async () => {
@@ -158,93 +148,53 @@ function SidePanel() {
     );
   };
 
-  return (
-    <div className="h-full bg-gray-50 overflow-x-hidden w-full max-w-full relative">
-      {/* Search Bar */}
-      <div className="py-2 border-b border-gray-100 flex items-center relative z-10">
-        <div className="relative flex-1">
-          <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
-            <Icon name="search" size={16} className="opacity-60" />
-          </div>
-          <input
-            type="text"
-            placeholder="검색"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            onKeyDown={handleSearchKeyDown}
-            className="w-full pl-10 pr-12 py-1.5 text-sm bg-gray-50 focus:outline-none transition-colors"
+  const renderContent = () => {
+    switch (currentTab) {
+      case 'tabs':
+        return (
+          <Body
+            tabs={tabs}
+            filteredTabs={filteredTabs}
+            activeTabId={activeTabId}
+            searchQuery={searchQuery}
+            onTabClick={handleTabClick}
+            onTabClose={handleTabClose}
+            onDragEnd={handleDragEnd}
+            highlightText={highlightText}
           />
-          {searchQuery && (
-            <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center gap-1">
-              <Icon
-                name="close"
-                size={16}
-                onClick={() => setSearchQuery('')}
-                className="cursor-pointer opacity-60 hover:opacity-100 transition-opacity"
-                tooltip="검색 지우기"
-                tooltipPosition="bottom"
-              />
-              <Icon
-                name="send"
-                size={16}
-                onClick={handleNewTabSearch}
-                className="cursor-pointer opacity-60 hover:opacity-100 transition-opacity"
-                tooltip="새 탭에서 검색"
-                tooltipPosition="bottom"
-              />
-            </div>
-          )}
-        </div>
-      </div>
-
-      {/* Tabs List */}
-      <div className="flex-1 overflow-y-auto overflow-x-hidden w-full max-w-full min-h-0">
-        <DndContext
-          sensors={sensors}
-          collisionDetection={closestCenter}
-          onDragEnd={handleDragEnd}
-        >
-          <div className="w-full max-w-full overflow-hidden">
-            <SortableContext items={filteredTabs.map(tab => tab.id!)} strategy={verticalListSortingStrategy}>
-            {filteredTabs.length > 0 ? (
-              filteredTabs.map((tab) => (
-                <SortableItem
-                  key={tab.id}
-                  tab={tab}
-                  activeTabId={activeTabId}
-                  handleTabClick={handleTabClick}
-                  handleTabClose={handleTabClose}
-                  highlightText={highlightText}
-                  searchQuery={searchQuery}
-                />
-              ))
-            ) : searchQuery.trim() ? (
-              <div className="p-4 text-center text-gray-500 text-sm h-full flex items-center justify-center">
-                검색 결과가 없습니다
-              </div>
-            ) : null}
-            </SortableContext>
+        );
+      case 'bookmark':
+        return (
+          <div className="flex-1 overflow-y-auto overflow-x-hidden w-full max-w-full min-h-0 flex items-center justify-center text-gray-500">
+            북마크 기능 (개발 예정)
           </div>
-        </DndContext>
-      </div>
+        );
+      case 'history':
+        return (
+          <div className="flex-1 overflow-y-auto overflow-x-hidden w-full max-w-full min-h-0 flex items-center justify-center text-gray-500">
+            방문 기록 기능 (개발 예정)
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
 
-      {/* Add Tab Button */}
-      {!searchQuery.trim() && (
-        <div className="p-3 border-t border-gray-100 flex justify-center">
-          <button
-            onClick={() => chrome.tabs.create({})}
-            className="flex items-center justify-center w-6 h-6 hover:bg-gray-100 rounded-full transition-colors"
-          >
-            <Icon
-              name="add"
-              size={16}
-              tooltip="새 탭 만들기"
-              tooltipPosition="top"
-              className="opacity-60 hover:opacity-100 transition-opacity"
-            />
-          </button>
-        </div>
-      )}
+  return (
+    <div className="h-full bg-gray-50 overflow-x-hidden w-full max-w-full relative flex flex-col">
+      <Header
+        searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
+        onNewTabSearch={handleNewTabSearch}
+        onSearchKeyDown={handleSearchKeyDown}
+      />
+
+      {renderContent()}
+
+      <Footer
+        activeTab={currentTab}
+        onTabChange={setCurrentTab}
+      />
     </div>
   );
 }
