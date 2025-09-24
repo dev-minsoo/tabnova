@@ -6,6 +6,7 @@ interface TabProps {
   isActive: boolean;
   onClick: (tabId: number | undefined) => void;
   onClose: (tabId: number | undefined) => void;
+  onContextMenu?: (tab: chrome.tabs.Tab, x: number, y: number) => void;
   highlightText?: (text: string, query: string) => any;
   searchQuery?: string;
   className?: string;
@@ -21,6 +22,7 @@ export function Tab({
   isActive,
   onClick,
   onClose,
+  onContextMenu,
   highlightText,
   searchQuery,
   className = ''
@@ -46,6 +48,13 @@ export function Tab({
       onClick={(e) => {
         e.stopPropagation();
         onClick(tab.id);
+      }}
+      onContextMenu={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (onContextMenu) {
+          onContextMenu(tab, e.clientX, e.clientY);
+        }
       }}
     >
       <div className="flex items-center flex-grow min-w-0">

@@ -7,6 +7,7 @@ interface SortableItemProps {
   activeTabId: number | undefined;
   handleTabClick: (tabId: number | undefined) => void;
   handleTabClose: (tabId: number | undefined) => void;
+  onContextMenu?: (tab: chrome.tabs.Tab, x: number, y: number) => void;
   highlightText?: (text: string, query: string) => any;
   searchQuery?: string;
 }
@@ -16,6 +17,7 @@ export function SortableItem({
   activeTabId,
   handleTabClick,
   handleTabClose,
+  onContextMenu,
   highlightText,
   searchQuery
 }: SortableItemProps) {
@@ -42,6 +44,7 @@ export function SortableItem({
           isActive={tab.id === activeTabId}
           onClick={handleTabClick}
           onClose={handleTabClose}
+          onContextMenu={onContextMenu}
           highlightText={highlightText}
           searchQuery={searchQuery}
         />
