@@ -3,6 +3,8 @@ import { arrayMove } from '@dnd-kit/sortable';
 import { Header } from '../../components/Header';
 import { Body } from '../../components/Body';
 import { Footer } from '../../components/Footer';
+import { BookmarkList } from '../../components/BookmarkList';
+import { HistoryList } from '../../components/HistoryList';
 
 function SidePanel() {
   const [tabs, setTabs] = useState<chrome.tabs.Tab[]>([]);
@@ -165,14 +167,20 @@ function SidePanel() {
         );
       case 'bookmark':
         return (
-          <div className="flex-1 overflow-y-auto overflow-x-hidden w-full max-w-full min-h-0 flex items-center justify-center text-gray-500">
-            북마크 기능 (개발 예정)
+          <div className="flex-1 overflow-y-auto overflow-x-hidden w-full max-w-full min-h-0">
+            <BookmarkList
+              highlightText={highlightText}
+              searchQuery={searchQuery}
+            />
           </div>
         );
       case 'history':
         return (
-          <div className="flex-1 overflow-y-auto overflow-x-hidden w-full max-w-full min-h-0 flex items-center justify-center text-gray-500">
-            방문 기록 기능 (개발 예정)
+          <div className="flex-1 overflow-y-auto overflow-x-hidden w-full max-w-full min-h-0">
+            <HistoryList
+              highlightText={highlightText}
+              searchQuery={searchQuery}
+            />
           </div>
         );
       default:
