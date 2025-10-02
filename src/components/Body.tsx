@@ -4,6 +4,7 @@ import { arrayMove, SortableContext, sortableKeyboardCoordinates, verticalListSo
 import { SortableItem } from './SortableItem';
 import { Icon } from './Icon';
 import { TabContextMenu } from './TabContextMenu';
+import { Translation } from '../utils/i18n';
 
 interface BodyProps {
   tabs: chrome.tabs.Tab[];
@@ -14,6 +15,7 @@ interface BodyProps {
   onTabClose: (tabId: number | undefined) => void;
   onDragEnd: (event: any) => void;
   highlightText: (text: string, query: string) => any;
+  translation: Translation;
 }
 
 export function Body({
@@ -24,7 +26,8 @@ export function Body({
   onTabClick,
   onTabClose,
   onDragEnd,
-  highlightText
+  highlightText,
+  translation
 }: BodyProps) {
   const [contextMenu, setContextMenu] = useState<{
     tab: chrome.tabs.Tab;
@@ -71,11 +74,15 @@ export function Body({
                   onContextMenu={handleContextMenu}
                   highlightText={highlightText}
                   searchQuery={searchQuery}
+                  translation={translation}
                 />
               ))
             ) : searchQuery.trim() ? (
-              <div className="p-4 text-center text-gray-500 text-sm h-full flex items-center justify-center">
-                검색 결과가 없습니다
+              <div
+                className="p-4 text-center text-sm h-full flex items-center justify-center"
+                style={{ color: 'var(--text-secondary)' }}
+              >
+                {translation.search.noResults}
               </div>
             ) : null}
           </SortableContext>
@@ -84,17 +91,26 @@ export function Body({
 
       {/* Add Tab Button */}
       {!searchQuery.trim() && (
-        <div className="p-3 border-t border-gray-100 flex justify-center">
+        <div
+          className="p-3 border-t flex justify-center"
+          style={{ borderColor: 'var(--border-color)' }}
+        >
           <button
             onClick={() => chrome.tabs.create({})}
-            className="flex items-center justify-center w-6 h-6 hover:bg-gray-100 rounded-full transition-colors"
+            className="flex items-center justify-center w-6 h-6 rounded-full"
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = 'var(--hover-bg)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'transparent';
+            }}
           >
             <Icon
               name="add"
               size={16}
-              tooltip="새 탭 만들기"
+              tooltip={translation.tab.newTab}
               tooltipPosition="top"
-              className="opacity-60 hover:opacity-100 transition-opacity"
+              className="opacity-60 hover:opacity-100"
             />
           </button>
         </div>
@@ -108,6 +124,7 @@ export function Body({
           tab={contextMenu.tab}
           x={contextMenu.x}
           y={contextMenu.y}
+          translation={translation}
         />
       )}
     </div>

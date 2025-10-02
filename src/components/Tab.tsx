@@ -1,5 +1,6 @@
 import { Icon } from './Icon';
 import { useState, useEffect } from 'react';
+import { Translation } from '../utils/i18n';
 
 interface TabProps {
   tab: chrome.tabs.Tab;
@@ -10,6 +11,7 @@ interface TabProps {
   highlightText?: (text: string, query: string) => any;
   searchQuery?: string;
   className?: string;
+  translation: Translation;
 }
 
 function getExtensionId(url: string): string | null {
@@ -25,7 +27,8 @@ export function Tab({
   onContextMenu,
   highlightText,
   searchQuery,
-  className = ''
+  className = '',
+  translation
 }: TabProps) {
   const [extensionIcon, setExtensionIcon] = useState<string | null>(null);
 
@@ -41,10 +44,20 @@ export function Tab({
 
   return (
     <div
-      className={`group flex items-center px-3 py-2 transition-colors cursor-pointer w-full max-w-full overflow-hidden ${isActive
-          ? 'bg-gray-200'
-          : 'hover:bg-gray-100'
-        } ${className}`}
+      className={`group flex items-center px-3 py-2 cursor-pointer w-full max-w-full overflow-hidden ${className}`}
+      style={{
+        backgroundColor: isActive ? 'var(--bg-secondary)' : 'transparent',
+      }}
+      onMouseEnter={(e) => {
+        if (!isActive) {
+          e.currentTarget.style.backgroundColor = 'var(--hover-bg)';
+        }
+      }}
+      onMouseLeave={(e) => {
+        if (!isActive) {
+          e.currentTarget.style.backgroundColor = 'transparent';
+        }
+      }}
       onClick={(e) => {
         e.stopPropagation();
         onClick(tab.id);
@@ -92,13 +105,19 @@ export function Tab({
         {/* Tab Info */}
         <div className="flex-grow min-w-0">
           {/* Tab Title */}
-          <div className="truncate text-sm text-gray-700 font-medium">
+          <div
+            className="truncate text-sm font-medium"
+            style={{ color: 'var(--text-primary)' }}
+          >
             {highlightText && searchQuery ? highlightText(tab.title || '', searchQuery) : tab.title}
           </div>
 
           {/* URL - Show when searching */}
           {searchQuery && searchQuery.trim() && (
-            <div className="truncate text-xs text-gray-500 mt-0.5">
+            <div
+              className="truncate text-xs mt-0.5"
+              style={{ color: 'var(--text-secondary)' }}
+            >
               {highlightText ? highlightText(tab.url || '', searchQuery) : tab.url}
             </div>
           )}
@@ -110,13 +129,13 @@ export function Tab({
         <Icon
           name="close"
           size={16}
-          tooltip="탭 닫기"
+          tooltip={translation.tab.closeTab}
           tooltipPosition="top"
           onClick={(e) => {
             e.stopPropagation();
             onClose(tab.id);
           }}
-          className="opacity-70 hover:opacity-100 hover:bg-gray-200 rounded-full p-1 cursor-pointer transition-all"
+          className="opacity-70 hover:opacity-100 rounded-full p-1 cursor-pointer"
         />
       </div>
     </div>

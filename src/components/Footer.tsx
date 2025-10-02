@@ -1,37 +1,39 @@
 import { TabButton } from './TabButton';
+import { Translation } from '../utils/i18n';
 
 type TabType = 'tabs' | 'bookmark' | 'history' | 'settings';
 
 interface FooterProps {
   activeTab: TabType;
   onTabChange: (tab: TabType) => void;
+  translation: Translation;
 }
 
-export function Footer({ activeTab, onTabChange }: FooterProps) {
+export function Footer({ activeTab, onTabChange, translation }: FooterProps) {
   const tabs = [
     {
       id: 'tabs' as TabType,
       icon: 'tabs',
-      label: '탭',
-      tooltip: '탭'
+      label: translation.common.tabs,
+      tooltip: translation.common.tabs
     },
     {
       id: 'bookmark' as TabType,
       icon: 'bookmark',
-      label: '북마크',
-      tooltip: '북마크'
+      label: translation.common.bookmarks,
+      tooltip: translation.common.bookmarks
     },
     {
       id: 'history' as TabType,
       icon: 'history',
-      label: '방문 기록',
-      tooltip: '방문 기록'
+      label: translation.footer.visitHistory,
+      tooltip: translation.footer.visitHistory
     },
     {
       id: 'settings' as TabType,
       icon: 'settings',
-      label: '설정',
-      tooltip: '설정'
+      label: translation.common.settings,
+      tooltip: translation.common.settings
     },
   ];
 
@@ -45,7 +47,13 @@ export function Footer({ activeTab, onTabChange }: FooterProps) {
   };
 
   return (
-    <div className="border-t border-gray-200 bg-white">
+    <div
+      className="border-t"
+      style={{
+        borderColor: 'var(--border-color)',
+        backgroundColor: 'var(--bg-primary)',
+      }}
+    >
       <div className="flex">
         {tabs.map((tab) => (
           <TabButton

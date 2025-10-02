@@ -1,5 +1,6 @@
 import { useRef, useEffect } from 'react';
 import { Icon } from './Icon';
+import { Translation } from '../utils/i18n';
 
 interface TabContextMenuProps {
   isOpen: boolean;
@@ -7,9 +8,10 @@ interface TabContextMenuProps {
   tab: chrome.tabs.Tab;
   x: number;
   y: number;
+  translation: Translation;
 }
 
-export function TabContextMenu({ isOpen, onClose, tab, x, y }: TabContextMenuProps) {
+export function TabContextMenu({ isOpen, onClose, tab, x, y, translation }: TabContextMenuProps) {
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -66,9 +68,9 @@ export function TabContextMenu({ isOpen, onClose, tab, x, y }: TabContextMenuPro
   };
 
   const menuItems = [
-    { id: 'close', label: '탭 닫기', icon: 'close', onClick: handleCloseTab },
-    { id: 'closeOthers', label: '다른 탭 닫기', icon: 'close', onClick: handleCloseOtherTabs },
-    { id: 'duplicate', label: '탭 복제', icon: 'tabs', onClick: handleDuplicateTab },
+    { id: 'close', label: translation.tab.closeTab, icon: 'close', onClick: handleCloseTab },
+    { id: 'closeOthers', label: translation.tab.closeOtherTabs, icon: 'close', onClick: handleCloseOtherTabs },
+    { id: 'duplicate', label: translation.tab.duplicateTab, icon: 'tabs', onClick: handleDuplicateTab },
   ];
 
   return (

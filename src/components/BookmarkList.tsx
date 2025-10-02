@@ -93,7 +93,13 @@ export function BookmarkList({ highlightText, searchQuery }: BookmarkListProps) 
       return (
         <div
           key={node.id}
-          className={`group flex items-center py-1.5 pr-3 transition-colors cursor-pointer w-full max-w-full overflow-hidden hover:bg-gray-100 ${depth === 0 ? 'pl-3' : ''}`}
+          className={`group flex items-center py-1.5 pr-3 cursor-pointer w-full max-w-full overflow-hidden ${depth === 0 ? 'pl-3' : ''}`}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = 'var(--hover-bg)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = 'transparent';
+          }}
           onClick={() => handleBookmarkClick(node.url!)}
         >
           <div className="flex items-center flex-grow min-w-0">
@@ -105,19 +111,26 @@ export function BookmarkList({ highlightText, searchQuery }: BookmarkListProps) 
                   {parentIsLast.map((parentLast, index) => (
                     <div
                       key={index}
-                      className="w-4 flex justify-center items-center text-gray-400 text-xs font-mono"
+                      className="w-4 flex justify-center items-center text-xs font-mono"
+                      style={{ color: 'var(--text-secondary)' }}
                     >
                       {!parentLast ? '│' : ' '}
                     </div>
                   ))}
 
                   {/* Current level connection */}
-                  <div className="w-4 flex justify-center items-center text-gray-400 text-xs font-mono">
+                  <div
+                    className="w-4 flex justify-center items-center text-xs font-mono"
+                    style={{ color: 'var(--text-secondary)' }}
+                  >
                     {isLast ? '└' : '├'}
                   </div>
 
                   {/* Horizontal dash */}
-                  <div className="w-2 flex items-center text-gray-400 text-xs font-mono">
+                  <div
+                    className="w-2 flex items-center text-xs font-mono"
+                    style={{ color: 'var(--text-secondary)' }}
+                  >
                     ─
                   </div>
                 </>
@@ -139,11 +152,17 @@ export function BookmarkList({ highlightText, searchQuery }: BookmarkListProps) 
 
             {/* Bookmark Title */}
             <div className="flex-grow min-w-0">
-              <div className="truncate text-sm text-gray-700">
+              <div
+                className="truncate text-sm"
+                style={{ color: 'var(--text-primary)' }}
+              >
                 {highlightText && searchQuery ? highlightText(node.title, searchQuery) : node.title}
               </div>
               {searchQuery && searchQuery.trim() && (
-                <div className="truncate text-xs text-gray-500 mt-0.5">
+                <div
+                  className="truncate text-xs mt-0.5"
+                  style={{ color: 'var(--text-secondary)' }}
+                >
                   {highlightText ? highlightText(node.url!, searchQuery) : node.url}
                 </div>
               )}
@@ -156,7 +175,13 @@ export function BookmarkList({ highlightText, searchQuery }: BookmarkListProps) 
       return (
         <div key={node.id}>
           <div
-            className={`group flex items-center py-1.5 pr-3 transition-colors cursor-pointer w-full max-w-full overflow-hidden hover:bg-gray-100 ${depth === 0 ? 'pl-3' : ''}`}
+            className={`group flex items-center py-1.5 pr-3 cursor-pointer w-full max-w-full overflow-hidden ${depth === 0 ? 'pl-3' : ''}`}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = 'var(--hover-bg)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'transparent';
+            }}
             onClick={() => toggleFolder(node.id)}
           >
             <div className="flex items-center flex-grow min-w-0">
@@ -168,19 +193,26 @@ export function BookmarkList({ highlightText, searchQuery }: BookmarkListProps) 
                     {parentIsLast.map((parentLast, index) => (
                       <div
                         key={index}
-                        className="w-4 flex justify-center items-center text-gray-400 text-xs font-mono"
+                        className="w-4 flex justify-center items-center text-xs font-mono"
+                        style={{ color: 'var(--text-secondary)' }}
                       >
                         {!parentLast ? '│' : ' '}
                       </div>
                     ))}
 
                     {/* Current level connection */}
-                    <div className="w-4 flex justify-center items-center text-gray-400 text-xs font-mono">
+                    <div
+                      className="w-4 flex justify-center items-center text-xs font-mono"
+                      style={{ color: 'var(--text-secondary)' }}
+                    >
                       {isLast ? '└' : '├'}
                     </div>
 
                     {/* Horizontal dash */}
-                    <div className="w-2 flex items-center text-gray-400 text-xs font-mono">
+                    <div
+                      className="w-2 flex items-center text-xs font-mono"
+                      style={{ color: 'var(--text-secondary)' }}
+                    >
                       ─
                     </div>
                   </>
@@ -198,10 +230,18 @@ export function BookmarkList({ highlightText, searchQuery }: BookmarkListProps) 
 
               {/* Folder name with count */}
               <div className="flex-grow min-w-0">
-                <div className="truncate text-sm text-gray-700 font-medium">
+                <div
+                  className="truncate text-sm font-medium"
+                  style={{ color: 'var(--text-primary)' }}
+                >
                   {highlightText && searchQuery ? highlightText(node.title, searchQuery) : node.title}
                   {node.children && node.children.length > 0 && (
-                    <span className="text-gray-500 ml-1">({getTotalItemCount(node)})</span>
+                    <span
+                      className="ml-1"
+                      style={{ color: 'var(--text-secondary)' }}
+                    >
+                      ({getTotalItemCount(node)})
+                    </span>
                   )}
                 </div>
               </div>
@@ -229,7 +269,12 @@ export function BookmarkList({ highlightText, searchQuery }: BookmarkListProps) 
   if (loading) {
     return (
       <div className="flex items-center justify-center py-8">
-        <div className="text-sm text-gray-500">북마크 로딩 중...</div>
+        <div
+          className="text-sm"
+          style={{ color: 'var(--text-secondary)' }}
+        >
+          북마크 로딩 중...
+        </div>
       </div>
     );
   }
@@ -237,7 +282,12 @@ export function BookmarkList({ highlightText, searchQuery }: BookmarkListProps) 
   if (bookmarkTree.length === 0) {
     return (
       <div className="flex items-center justify-center py-8">
-        <div className="text-sm text-gray-500">북마크가 없습니다</div>
+        <div
+          className="text-sm"
+          style={{ color: 'var(--text-secondary)' }}
+        >
+          북마크가 없습니다
+        </div>
       </div>
     );
   }

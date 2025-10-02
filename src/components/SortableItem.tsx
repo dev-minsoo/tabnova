@@ -1,6 +1,7 @@
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { Tab } from './Tab';
+import { Translation } from '../utils/i18n';
 
 interface SortableItemProps {
   tab: chrome.tabs.Tab;
@@ -10,6 +11,7 @@ interface SortableItemProps {
   onContextMenu?: (tab: chrome.tabs.Tab, x: number, y: number) => void;
   highlightText?: (text: string, query: string) => any;
   searchQuery?: string;
+  translation: Translation;
 }
 
 export function SortableItem({
@@ -19,7 +21,8 @@ export function SortableItem({
   handleTabClose,
   onContextMenu,
   highlightText,
-  searchQuery
+  searchQuery,
+  translation
 }: SortableItemProps) {
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: tab.id! });
 
@@ -47,6 +50,7 @@ export function SortableItem({
           onContextMenu={onContextMenu}
           highlightText={highlightText}
           searchQuery={searchQuery}
+          translation={translation}
         />
       </div>
     </div>

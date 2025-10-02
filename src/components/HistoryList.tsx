@@ -84,7 +84,12 @@ export function HistoryList({ highlightText, searchQuery }: HistoryListProps) {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-8">
-        <div className="text-sm text-gray-500">오늘의 방문 기록 로딩 중...</div>
+        <div
+          className="text-sm"
+          style={{ color: 'var(--text-secondary)' }}
+        >
+          오늘의 방문 기록 로딩 중...
+        </div>
       </div>
     );
   }
@@ -92,7 +97,10 @@ export function HistoryList({ highlightText, searchQuery }: HistoryListProps) {
   if (filteredHistory.length === 0) {
     return (
       <div className="flex items-center justify-center py-8">
-        <div className="text-sm text-gray-500">
+        <div
+          className="text-sm"
+          style={{ color: 'var(--text-secondary)' }}
+        >
           {searchQuery ? '검색 결과가 없습니다' : '오늘 방문한 페이지가 없습니다'}
         </div>
       </div>
@@ -104,7 +112,13 @@ export function HistoryList({ highlightText, searchQuery }: HistoryListProps) {
       {filteredHistory.map((item) => (
         <div
           key={item.id}
-          className="group flex items-center px-3 py-2 transition-colors cursor-pointer w-full max-w-full overflow-hidden hover:bg-gray-100"
+          className="group flex items-center px-3 py-2 cursor-pointer w-full max-w-full overflow-hidden"
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = 'var(--hover-bg)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = 'transparent';
+          }}
           onClick={() => handleHistoryClick(item.url)}
         >
           <div className="flex items-center flex-grow min-w-0">
@@ -124,12 +138,18 @@ export function HistoryList({ highlightText, searchQuery }: HistoryListProps) {
             {/* History Info */}
             <div className="flex-grow min-w-0">
               {/* Page Title */}
-              <div className="truncate text-sm text-gray-700 font-medium">
+              <div
+                className="truncate text-sm font-medium"
+                style={{ color: 'var(--text-primary)' }}
+              >
                 {highlightText && searchQuery ? highlightText(item.title, searchQuery) : item.title}
               </div>
 
               {/* URL and Time */}
-              <div className="flex items-center text-xs text-gray-500 mt-0.5 space-x-2">
+              <div
+                className="flex items-center text-xs mt-0.5 space-x-2"
+                style={{ color: 'var(--text-secondary)' }}
+              >
                 <div className="truncate flex-grow">
                   {highlightText && searchQuery ? highlightText(item.url, searchQuery) : item.url}
                 </div>

@@ -5,6 +5,8 @@ import { Body } from '../../components/Body';
 import { Footer } from '../../components/Footer';
 import { BookmarkList } from '../../components/BookmarkList';
 import { HistoryList } from '../../components/HistoryList';
+import { applyTheme, getSettings } from '../../utils/settings';
+import { getTranslation, Translation } from '../../utils/i18n';
 
 function SidePanel() {
   const [tabs, setTabs] = useState<chrome.tabs.Tab[]>([]);
@@ -12,6 +14,20 @@ function SidePanel() {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [filteredTabs, setFilteredTabs] = useState<chrome.tabs.Tab[]>([]);
   const [currentTab, setCurrentTab] = useState<'tabs' | 'bookmark' | 'history' | 'settings'>('tabs');
+  const [translation, setTranslation] = useState<Translation | null>(null);
+
+  useEffect(() => {
+    const loadTranslation = async () => {
+      try {
+        const settings = await getSettings();
+        setTranslation(getTranslation(settings.language));
+      } catch (error) {
+        console.error('Error loading translation:', error);
+      }
+    };
+
+    loadTranslation();
+  }, []);
 
   useEffect(() => {
     const loadTabs = async () => {
@@ -48,10 +64,28 @@ function SidePanel() {
     chrome.tabs.onCreated.addListener(handleTabCreated);
     chrome.tabs.onRemoved.addListener(handleTabRemoved);
 
+    // Listen for settings changes from Options page
+    const handleStorageChange = (changes: { [key: string]: chrome.storage.StorageChange }, areaName: string) => {
+      if (areaName === 'sync' && changes.settings) {
+        const newSettings = changes.settings.newValue;
+        if (newSettings) {
+          if (newSettings.theme) {
+            applyTheme(newSettings.theme);
+          }
+          if (newSettings.language) {
+            setTranslation(getTranslation(newSettings.language));
+          }
+        }
+      }
+    };
+
+    chrome.storage.onChanged.addListener(handleStorageChange);
+
     return () => {
       chrome.tabs.onUpdated.removeListener(handleTabUpdated);
       chrome.tabs.onCreated.removeListener(handleTabCreated);
       chrome.tabs.onRemoved.removeListener(handleTabRemoved);
+      chrome.storage.onChanged.removeListener(handleStorageChange);
     };
   }, []);
 
@@ -141,7 +175,13 @@ function SidePanel() {
 
     return parts.map((part, index) =>
       regex.test(part) ? (
-        <span key={index} className="bg-yellow-200 text-yellow-800">
+        <span
+          key={index}
+          style={{
+            backgroundColor: '#fef08a',
+            color: '#92400e',
+          }}
+        >
           {part}
         </span>
       ) : (
@@ -151,6 +191,8 @@ function SidePanel() {
   };
 
   const renderContent = () => {
+    if (!translation) return null;
+
     switch (currentTab) {
       case 'tabs':
         return (
@@ -163,6 +205,7 @@ function SidePanel() {
             onTabClose={handleTabClose}
             onDragEnd={handleDragEnd}
             highlightText={highlightText}
+            translation={translation}
           />
         );
       case 'bookmark':
@@ -188,13 +231,21 @@ function SidePanel() {
     }
   };
 
+  if (!translation) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <div className="h-full bg-gray-50 overflow-x-hidden w-full max-w-full relative flex flex-col">
+    <div
+      className="h-full overflow-x-hidden w-full max-w-full relative flex flex-col"
+      style={{ backgroundColor: 'var(--bg-secondary)' }}
+    >
       <Header
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
         onNewTabSearch={handleNewTabSearch}
         onSearchKeyDown={handleSearchKeyDown}
+        translation={translation}
       />
 
       {renderContent()}
@@ -202,6 +253,7 @@ function SidePanel() {
       <Footer
         activeTab={currentTab}
         onTabChange={setCurrentTab}
+        translation={translation}
       />
     </div>
   );

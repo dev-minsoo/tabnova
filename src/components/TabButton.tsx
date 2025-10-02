@@ -15,10 +15,26 @@ export function TabButton({ id, icon, label, tooltip, isActive, onClick }: TabBu
   return (
     <button
       onClick={() => onClick(id)}
-      className={`flex-1 flex flex-col items-center justify-center py-2 px-2 transition-colors ${isActive
-        ? 'bg-blue-50 text-blue-600 border-t-2 border-blue-600'
-        : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
+      className={`flex-1 flex flex-col items-center justify-center py-2 px-2 border-t-2 ${isActive
+        ? 'border-blue-600'
+        : 'border-transparent'
         }`}
+      style={{
+        backgroundColor: isActive ? 'var(--bg-secondary)' : 'transparent',
+        color: isActive ? 'var(--accent-color)' : 'var(--text-secondary)',
+      }}
+      onMouseEnter={(e) => {
+        if (!isActive) {
+          e.currentTarget.style.backgroundColor = 'var(--hover-bg)';
+          e.currentTarget.style.color = 'var(--text-primary)';
+        }
+      }}
+      onMouseLeave={(e) => {
+        if (!isActive) {
+          e.currentTarget.style.backgroundColor = 'transparent';
+          e.currentTarget.style.color = 'var(--text-secondary)';
+        }
+      }}
     >
       <Icon
         name={icon}

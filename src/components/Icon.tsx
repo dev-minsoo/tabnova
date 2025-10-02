@@ -166,8 +166,12 @@ export function Icon({
         {iconElement}
         {showTooltip && createPortal(
           <div
-            style={tooltipStyle}
-            className="px-1.5 py-0.5 text-[10px] text-white bg-gray-800 rounded whitespace-nowrap shadow-lg pointer-events-none"
+            style={{
+              ...tooltipStyle,
+              backgroundColor: 'var(--text-primary)',
+              color: 'var(--bg-primary)',
+            }}
+            className="px-1.5 py-0.5 text-[10px] rounded whitespace-nowrap shadow-lg pointer-events-none"
           >
             {tooltip}
           </div>,
