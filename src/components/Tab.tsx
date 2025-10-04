@@ -2,6 +2,37 @@ import { Icon } from './Icon';
 import { useState, useEffect } from 'react';
 import { Translation } from '../utils/i18n';
 
+function FaviconWithFallback({
+  favIconUrl,
+  url,
+  extensionIcon
+}: {
+  favIconUrl?: string;
+  url?: string;
+  extensionIcon?: string | null;
+}) {
+  const [error, setError] = useState(false);
+
+  if (error || (!favIconUrl && !extensionIcon)) {
+    return (
+      <div className="flex-shrink-0 w-4 h-4 mr-2 mt-0.5">
+        <Icon name="globe" size={16} className="opacity-60" />
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex-shrink-0 w-4 h-4 mr-2 mt-0.5">
+      <img
+        src={extensionIcon || favIconUrl}
+        className="w-full h-full object-contain"
+        alt=""
+        onError={() => setError(true)}
+      />
+    </div>
+  );
+}
+
 interface TabProps {
   tab: chrome.tabs.Tab;
   isActive: boolean;
@@ -72,35 +103,11 @@ export function Tab({
     >
       <div className="flex items-center flex-grow min-w-0">
         {/* Favicon */}
-        <div className="flex-shrink-0 w-4 h-4 mr-2 mt-0.5">
-          {extensionIcon ? (
-            <img
-              src={extensionIcon}
-              className="w-full h-full object-contain"
-              alt=""
-              onError={(e) => {
-                e.currentTarget.src = 'icons/globe16.png';
-                e.currentTarget.onerror = null;
-              }}
-            />
-          ) : tab.favIconUrl ? (
-            <img
-              src={tab.favIconUrl}
-              className="w-full h-full object-contain"
-              alt=""
-              onError={(e) => {
-                e.currentTarget.src = 'icons/globe16.png';
-                e.currentTarget.onerror = null;
-              }}
-            />
-          ) : (
-            <img
-              src="icons/globe16.png"
-              className="w-full h-full object-contain"
-              alt=""
-            />
-          )}
-        </div>
+        <FaviconWithFallback
+          favIconUrl={tab.favIconUrl}
+          url={tab.url}
+          extensionIcon={extensionIcon}
+        />
 
         {/* Tab Info */}
         <div className="flex-grow min-w-0">

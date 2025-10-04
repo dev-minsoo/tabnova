@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Icon } from './Icon';
 
 interface HistoryListProps {
   highlightText?: (text: string, query: string) => any;
@@ -11,6 +12,29 @@ interface HistoryItem {
   url: string;
   lastVisitTime: number;
   visitCount: number;
+}
+
+function FaviconWithFallback({ url, fallbackIcon }: { url: string; fallbackIcon: string }) {
+  const [error, setError] = useState(false);
+
+  if (error) {
+    return (
+      <div className="flex-shrink-0 w-4 h-4 mr-2">
+        <Icon name={fallbackIcon} size={16} className="opacity-60" />
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex-shrink-0 w-4 h-4 mr-2">
+      <img
+        src={`https://www.google.com/s2/favicons?domain=${new URL(url).hostname}&sz=16`}
+        className="w-full h-full object-contain"
+        alt=""
+        onError={() => setError(true)}
+      />
+    </div>
+  );
 }
 
 export function HistoryList({ highlightText, searchQuery }: HistoryListProps) {
@@ -123,16 +147,8 @@ export function HistoryList({ highlightText, searchQuery }: HistoryListProps) {
         >
           <div className="flex items-center flex-grow min-w-0">
             {/* Favicon */}
-            <div className="flex-shrink-0 w-4 h-4 mr-2 mt-0.5">
-              <img
-                src={`https://www.google.com/s2/favicons?domain=${new URL(item.url).hostname}&sz=16`}
-                className="w-full h-full object-contain"
-                alt=""
-                onError={(e) => {
-                  e.currentTarget.src = 'icons/history16.png';
-                  e.currentTarget.onerror = null;
-                }}
-              />
+            <div className="mt-0.5">
+              <FaviconWithFallback url={item.url} fallbackIcon="history" />
             </div>
 
             {/* History Info */}

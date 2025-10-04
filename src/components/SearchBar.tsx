@@ -19,7 +19,7 @@ export function SearchBar({
 }: SearchBarProps) {
   return (
     <div className="relative flex-1">
-      <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
+      <div className="absolute left-3 top-1/2 transform -translate-y-1/2 flex items-center">
         <Icon name="search" size={16} className="opacity-60" />
       </div>
       <input
@@ -28,9 +28,9 @@ export function SearchBar({
         value={searchQuery}
         onChange={(e) => onSearchChange(e.target.value)}
         onKeyDown={onSearchKeyDown}
-        className="w-full pl-10 pr-12 py-1.5 text-sm focus:outline-none transition-colors"
+        className="w-full pl-10 pr-12 py-1.5 text-sm focus:outline-none transition-colors [&::placeholder]:transition-colors"
         style={{
-          backgroundColor: 'var(--bg-primary)',
+          backgroundColor: 'transparent',
           color: 'var(--text-primary)',
         }}
       />

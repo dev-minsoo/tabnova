@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Icon } from './Icon';
 
 interface BookmarkListProps {
   highlightText?: (text: string, query: string) => any;
@@ -11,6 +12,29 @@ interface BookmarkNode {
   url?: string;
   children?: BookmarkNode[];
   dateAdded?: number;
+}
+
+function FaviconWithFallback({ url, fallbackIcon }: { url: string; fallbackIcon: string }) {
+  const [error, setError] = useState(false);
+
+  if (error) {
+    return (
+      <div className="flex-shrink-0 w-4 h-4 mr-2 ml-1">
+        <Icon name={fallbackIcon} size={16} className="opacity-60" />
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex-shrink-0 w-4 h-4 mr-2 ml-1">
+      <img
+        src={`https://www.google.com/s2/favicons?domain=${new URL(url).hostname}&sz=16`}
+        className="w-full h-full object-contain"
+        alt=""
+        onError={() => setError(true)}
+      />
+    </div>
+  );
 }
 
 export function BookmarkList({ highlightText, searchQuery }: BookmarkListProps) {
@@ -138,17 +162,7 @@ export function BookmarkList({ highlightText, searchQuery }: BookmarkListProps) 
             </div>
 
             {/* Favicon */}
-            <div className="flex-shrink-0 w-4 h-4 mr-2 ml-1">
-              <img
-                src={`https://www.google.com/s2/favicons?domain=${new URL(node.url!).hostname}&sz=16`}
-                className="w-full h-full object-contain"
-                alt=""
-                onError={(e) => {
-                  e.currentTarget.src = 'icons/bookmark16.png';
-                  e.currentTarget.onerror = null;
-                }}
-              />
-            </div>
+            <FaviconWithFallback url={node.url!} fallbackIcon="bookmark" />
 
             {/* Bookmark Title */}
             <div className="flex-grow min-w-0">
@@ -221,11 +235,7 @@ export function BookmarkList({ highlightText, searchQuery }: BookmarkListProps) 
 
               {/* Folder icon */}
               <div className="flex-shrink-0 w-4 h-4 mr-2 ml-1">
-                <img
-                  src="icons/folder16.png"
-                  className="w-full h-full object-contain"
-                  alt="folder"
-                />
+                <Icon name="folder" size={16} className="opacity-60" />
               </div>
 
               {/* Folder name with count */}

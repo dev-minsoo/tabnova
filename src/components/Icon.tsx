@@ -1,5 +1,17 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
+import SearchIcon from '@mui/icons-material/Search';
+import CloseIcon from '@mui/icons-material/Close';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import AddIcon from '@mui/icons-material/Add';
+import TabIcon from '@mui/icons-material/Tab';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import HistoryIcon from '@mui/icons-material/History';
+import SettingsIcon from '@mui/icons-material/Settings';
+import LanguageIcon from '@mui/icons-material/Language';
+import FolderIcon from '@mui/icons-material/Folder';
+import PublicOutlinedIcon from '@mui/icons-material/PublicOutlined';
+import { SvgIconProps } from '@mui/material/SvgIcon';
 
 type TooltipPosition = 'top' | 'bottom' | 'left' | 'right';
 
@@ -10,8 +22,20 @@ interface IconProps {
   tooltipPosition?: TooltipPosition;
   onClick?: (e: React.MouseEvent) => void;
   className?: string;
-  alt?: string;
 }
+
+const iconMap: Record<string, React.ComponentType<SvgIconProps>> = {
+  search: SearchIcon,
+  close: CloseIcon,
+  send: ArrowForwardIcon,
+  add: AddIcon,
+  tabs: TabIcon,
+  bookmark: BookmarkBorderIcon,
+  history: HistoryIcon,
+  settings: SettingsIcon,
+  globe: PublicOutlinedIcon,
+  folder: FolderIcon,
+};
 
 function getTooltipPosition(rect: DOMRect, position: TooltipPosition, tooltipText: string) {
   const offset = 8;
@@ -113,13 +137,13 @@ export function Icon({
   tooltip,
   tooltipPosition = 'top',
   onClick,
-  className = '',
-  alt = ''
+  className = ''
 }: IconProps) {
   const [showTooltip, setShowTooltip] = useState(false);
   const [tooltipStyle, setTooltipStyle] = useState<React.CSSProperties>({});
-  const iconRef = useRef<HTMLImageElement>(null);
-  const iconSrc = `icons/${name}${size}.png`;
+  const iconRef = useRef<HTMLDivElement>(null);
+
+  const IconComponent = iconMap[name];
 
   const updateTooltipPosition = () => {
     if (iconRef.current && showTooltip && tooltip) {
@@ -147,17 +171,21 @@ export function Icon({
     }
   }, [showTooltip, tooltipPosition]);
 
+  if (!IconComponent) {
+    console.warn(`Icon "${name}" not found in iconMap`);
+    return null;
+  }
+
   const iconElement = (
-    <img
+    <div
       ref={iconRef}
-      src={iconSrc}
-      alt={alt || name}
-      className={`object-contain ${className}`}
-      style={{ width: size, height: size }}
+      className={`inline-flex items-center justify-center ${className}`}
       onClick={onClick}
       onMouseEnter={() => setShowTooltip(true)}
       onMouseLeave={() => setShowTooltip(false)}
-    />
+    >
+      <IconComponent sx={{ width: size, height: size }} />
+    </div>
   );
 
   if (tooltip) {
