@@ -11,6 +11,8 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import LanguageIcon from '@mui/icons-material/Language';
 import FolderIcon from '@mui/icons-material/Folder';
 import PublicOutlinedIcon from '@mui/icons-material/PublicOutlined';
+import VolumeUpIcon from '@mui/icons-material/VolumeUp';
+import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 import { SvgIconProps } from '@mui/material/SvgIcon';
 
 type TooltipPosition = 'top' | 'bottom' | 'left' | 'right';
@@ -35,6 +37,8 @@ const iconMap: Record<string, React.ComponentType<SvgIconProps>> = {
   settings: SettingsIcon,
   globe: PublicOutlinedIcon,
   folder: FolderIcon,
+  volumeUp: VolumeUpIcon,
+  volumeOff: VolumeOffIcon,
 };
 
 function getTooltipPosition(rect: DOMRect, position: TooltipPosition, tooltipText: string) {

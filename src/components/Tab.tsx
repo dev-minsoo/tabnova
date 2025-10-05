@@ -73,11 +73,18 @@ export function Tab({
     }
   }, [tab.url, tab.favIconUrl]);
 
+  const handleMuteToggle = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (tab.id) {
+      await chrome.tabs.update(tab.id, { muted: !tab.mutedInfo?.muted });
+    }
+  };
+
   return (
     <div
       className={`group flex items-center px-3 py-2 cursor-pointer w-full max-w-full overflow-hidden ${className}`}
       style={{
-        backgroundColor: isActive ? 'var(--bg-secondary)' : 'transparent',
+        backgroundColor: isActive ? 'rgba(var(--accent-color-rgb), 0.15)' : 'transparent',
       }}
       onMouseEnter={(e) => {
         if (!isActive) {
@@ -131,8 +138,20 @@ export function Tab({
         </div>
       </div>
 
-      {/* Close Button */}
-      <div className="flex-shrink-0 ml-2 opacity-0 group-hover:opacity-100 transition-opacity">
+      <div className="flex-shrink-0 ml-2 flex items-center gap-1">
+        {/* Audio indicator */}
+        {tab.audible && (
+          <Icon
+            name={tab.mutedInfo?.muted ? 'volumeOff' : 'volumeUp'}
+            size={16}
+            tooltip={tab.mutedInfo?.muted ? translation.tab.unmuteTab : translation.tab.muteTab}
+            tooltipPosition="top"
+            onClick={handleMuteToggle}
+            className="opacity-70 hover:opacity-100 rounded-full p-1 cursor-pointer"
+          />
+        )}
+
+        {/* Close Button */}
         <Icon
           name="close"
           size={16}
