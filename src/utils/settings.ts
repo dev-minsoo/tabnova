@@ -5,11 +5,13 @@ export type ThemeMode = 'system' | 'light' | 'dark';
 export interface Settings {
   language: Language;
   theme: ThemeMode;
+  accentColor: string;
 }
 
 export const DEFAULT_SETTINGS: Settings = {
   language: detectLanguage(),
   theme: 'system',
+  accentColor: '#3b82f6', // Default blue color
 };
 
 export async function getSettings(): Promise<Settings> {
@@ -32,6 +34,11 @@ export async function saveSettings(settings: Partial<Settings>): Promise<void> {
     if (settings.theme !== undefined) {
       applyTheme(settings.theme);
     }
+
+    // Apply accent color immediately
+    if (settings.accentColor !== undefined) {
+      applyAccentColor(settings.accentColor);
+    }
   } catch (error) {
     console.error('Failed to save settings:', error);
     throw error;
@@ -52,9 +59,24 @@ export function applyTheme(theme: ThemeMode): void {
   }
 }
 
+export function applyAccentColor(color: string): void {
+  document.documentElement.style.setProperty('--accent-color', color);
+
+  // Convert hex to RGB for alpha blending
+  const hexToRgb = (hex: string) => {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return `${r}, ${g}, ${b}`;
+  };
+
+  document.documentElement.style.setProperty('--accent-color-rgb', hexToRgb(color));
+}
+
 export async function initializeSettings(): Promise<Settings> {
   const settings = await getSettings();
   applyTheme(settings.theme);
+  applyAccentColor(settings.accentColor);
 
   // Listen for system theme changes if system mode is selected
   const setupSystemThemeListener = async () => {

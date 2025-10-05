@@ -10,6 +10,8 @@ export interface Translation {
     system: string;
     light: string;
     dark: string;
+    accentColor: string;
+    accentColorDesc: string;
     saved: string;
     saveFailed: string;
     sidePanelPosition: string;
@@ -43,6 +45,8 @@ export interface Translation {
     closeOtherTabs: string;
     duplicateTab: string;
     newTab: string;
+    muteTab: string;
+    unmuteTab: string;
   };
   footer: {
     visitHistory: string;
@@ -60,6 +64,8 @@ const translations: Record<Language, Translation> = {
       system: 'System',
       light: 'Light',
       dark: 'Dark',
+      accentColor: 'Accent Color',
+      accentColorDesc: 'Choose a color for highlights and selections',
       saved: 'Saved!',
       saveFailed: 'Failed to save settings',
       sidePanelPosition: 'Side Panel Position',
@@ -93,6 +99,8 @@ const translations: Record<Language, Translation> = {
       closeOtherTabs: 'Close other tabs',
       duplicateTab: 'Duplicate tab',
       newTab: 'New tab',
+      muteTab: 'Mute tab',
+      unmuteTab: 'Unmute tab',
     },
     footer: {
       visitHistory: 'Visit History',
@@ -108,6 +116,8 @@ const translations: Record<Language, Translation> = {
       system: '시스템',
       light: '밝게',
       dark: '어둡게',
+      accentColor: '강조 색상',
+      accentColorDesc: '하이라이트 및 선택 항목에 사용할 색상을 선택하세요',
       saved: '저장됨!',
       saveFailed: '설정 저장 실패',
       sidePanelPosition: '사이드 패널 위치',
@@ -141,6 +151,8 @@ const translations: Record<Language, Translation> = {
       closeOtherTabs: '다른 탭 닫기',
       duplicateTab: '탭 복제',
       newTab: '새 탭 만들기',
+      muteTab: '음소거',
+      unmuteTab: '음소거 해제',
     },
     footer: {
       visitHistory: '방문 기록',

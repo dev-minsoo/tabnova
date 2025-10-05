@@ -15,13 +15,11 @@ export function TabButton({ id, icon, label, tooltip, isActive, onClick }: TabBu
   return (
     <button
       onClick={() => onClick(id)}
-      className={`flex-1 flex flex-col items-center justify-center py-2 px-2 border-t-2 ${isActive
-        ? 'border-blue-600'
-        : 'border-transparent'
-        }`}
+      className={`flex-1 flex flex-col items-center justify-center py-2 px-2 border-t-2`}
       style={{
-        backgroundColor: isActive ? 'var(--bg-secondary)' : 'transparent',
+        backgroundColor: isActive ? 'rgba(var(--accent-color-rgb), 0.15)' : 'transparent',
         color: isActive ? 'var(--accent-color)' : 'var(--text-secondary)',
+        borderTopColor: isActive ? 'var(--accent-color)' : 'transparent',
       }}
       onMouseEnter={(e) => {
         if (!isActive) {

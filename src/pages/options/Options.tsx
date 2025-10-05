@@ -32,6 +32,14 @@ function Options() {
     await handleSave({ theme });
   };
 
+  const handleAccentColorChange = async (color: string) => {
+    if (!settings) return;
+
+    const newSettings = { ...settings, accentColor: color };
+    setSettings(newSettings);
+    await handleSave({ accentColor: color });
+  };
+
 
   const handleSave = async (partialSettings: Partial<Settings>) => {
     try {
@@ -207,6 +215,32 @@ function Options() {
                     <span>{translation.options.dark}</span>
                   </span>
                 </label>
+              </div>
+            </div>
+          </div>
+
+          {/* Accent Color Setting */}
+          <div className="flex items-start gap-8">
+            <div className="flex-1">
+              <h2 className="text-lg font-medium mb-1">{translation.options.accentColor}</h2>
+              <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+                {translation.options.accentColorDesc}
+              </p>
+            </div>
+            <div className="flex gap-2">
+              <div className="flex items-center gap-3">
+                {['#3b82f6', '#ef4444', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899'].map((color) => (
+                  <button
+                    key={color}
+                    onClick={() => handleAccentColorChange(color)}
+                    className="w-8 h-8 rounded-full border-2 transition-transform hover:scale-110"
+                    style={{
+                      backgroundColor: color,
+                      borderColor: settings.accentColor === color ? 'var(--text-primary)' : 'transparent',
+                      boxShadow: settings.accentColor === color ? '0 0 0 2px var(--bg-primary)' : 'none',
+                    }}
+                  />
+                ))}
               </div>
             </div>
           </div>

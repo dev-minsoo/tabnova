@@ -5,7 +5,7 @@ import { Body } from '../../components/Body';
 import { Footer } from '../../components/Footer';
 import { BookmarkList } from '../../components/BookmarkList';
 import { HistoryList } from '../../components/HistoryList';
-import { applyTheme, getSettings } from '../../utils/settings';
+import { applyTheme, applyAccentColor, getSettings } from '../../utils/settings';
 import { getTranslation, Translation } from '../../utils/i18n';
 
 function SidePanel() {
@@ -17,16 +17,18 @@ function SidePanel() {
   const [translation, setTranslation] = useState<Translation | null>(null);
 
   useEffect(() => {
-    const loadTranslation = async () => {
+    const loadSettings = async () => {
       try {
         const settings = await getSettings();
         setTranslation(getTranslation(settings.language));
+        applyTheme(settings.theme);
+        applyAccentColor(settings.accentColor);
       } catch (error) {
-        console.error('Error loading translation:', error);
+        console.error('Error loading settings:', error);
       }
     };
 
-    loadTranslation();
+    loadSettings();
   }, []);
 
   useEffect(() => {
@@ -74,6 +76,9 @@ function SidePanel() {
           }
           if (newSettings.language) {
             setTranslation(getTranslation(newSettings.language));
+          }
+          if (newSettings.accentColor) {
+            applyAccentColor(newSettings.accentColor);
           }
         }
       }
