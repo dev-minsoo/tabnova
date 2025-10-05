@@ -26,6 +26,12 @@ export function chromeExtensionPlugin(): Plugin {
         console.log('Copied icons directory');
       }
 
+      // Copy image directory
+      if (fs.existsSync('src/public/image') && !fs.existsSync('dist/image')) {
+        fs.cpSync('src/public/image', 'dist/image', { recursive: true });
+        console.log('Copied image directory');
+      }
+
       // Clean up empty directories
       if (fs.existsSync('dist/src')) {
         fs.rmSync('dist/src', { recursive: true, force: true });

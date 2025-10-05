@@ -271,6 +271,54 @@ function Options() {
 
         </div>
 
+        {/* Donate Section */}
+        <div className="border-t mt-8 pt-8" style={{ borderColor: 'var(--border-color)' }}>
+          <div className="flex items-start gap-8">
+            <div className="flex-1">
+              <h2 className="text-lg font-medium mb-1">💝 {translation.options.donate}</h2>
+              <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+                {translation.options.donateDesc}
+              </p>
+            </div>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => chrome.tabs.create({ url: chrome.runtime.getURL('image/qr-code.png') })}
+                className="px-4 py-2 border rounded transition-colors"
+                style={{
+                  backgroundColor: 'var(--bg-primary)',
+                  borderColor: 'var(--border-color)',
+                  color: 'var(--text-primary)',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = 'var(--hover-bg)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'var(--bg-primary)';
+                }}
+              >
+                📱 {translation.options.showQR}
+              </button>
+              <button
+                onClick={() => window.open('https://buymeacoffee.com/dev.minsoo', '_blank')}
+                className="px-4 py-2 border rounded transition-colors"
+                style={{
+                  backgroundColor: 'var(--bg-primary)',
+                  borderColor: 'var(--border-color)',
+                  color: 'var(--text-primary)',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = 'var(--hover-bg)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'var(--bg-primary)';
+                }}
+              >
+                ☕ {translation.options.buyMeCoffee}
+              </button>
+            </div>
+          </div>
+        </div>
+
       </div>
 
       {/* Toast Container */}

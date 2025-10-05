@@ -18,6 +18,10 @@ export interface Translation {
     shortcuts: string;
     shortcutsDesc: string;
     openShortcutSettings: string;
+    donate: string;
+    donateDesc: string;
+    buyMeCoffee: string;
+    showQR: string;
   };
   common: {
     search: string;
@@ -64,6 +68,10 @@ const translations: Record<Language, Translation> = {
       shortcuts: 'Keyboard Shortcuts',
       shortcutsDesc: 'Configure keyboard shortcuts for TabNova',
       openShortcutSettings: 'Open Shortcut Settings',
+      donate: 'Donate',
+      donateDesc: 'If this extension has been helpful, please consider supporting its development and maintenance.',
+      buyMeCoffee: 'Buy me a coffee',
+      showQR: 'Show QR',
     },
     common: {
       search: 'Search',
@@ -108,6 +116,10 @@ const translations: Record<Language, Translation> = {
       shortcuts: '키보드 단축키',
       shortcutsDesc: 'TabNova 키보드 단축키를 설정합니다',
       openShortcutSettings: '단축키 설정 열기',
+      donate: '후원하기',
+      donateDesc: '이 확장프로그램이 도움이 되셨다면 후원을 고려해주세요. 개발과 유지보수에 큰 도움이 됩니다.',
+      buyMeCoffee: 'Buy me a coffee',
+      showQR: 'QR 보기',
     },
     common: {
       search: '검색',
