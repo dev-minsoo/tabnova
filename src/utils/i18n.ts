@@ -51,6 +51,20 @@ export interface Translation {
   footer: {
     visitHistory: string;
   };
+  toolbar: {
+    newTab: string;
+    refresh: string;
+    muteAll: string;
+    unmuteAll: string;
+  };
+  quickMenu: {
+    addQuickLink: string;
+    linkName: string;
+    linkUrl: string;
+    add: string;
+    cancel: string;
+    delete: string;
+  };
 }
 
 const translations: Record<Language, Translation> = {
@@ -105,6 +119,20 @@ const translations: Record<Language, Translation> = {
     footer: {
       visitHistory: 'Visit History',
     },
+    toolbar: {
+      newTab: 'New Tab',
+      refresh: 'Refresh',
+      muteAll: 'Mute All Tabs',
+      unmuteAll: 'Unmute All Tabs',
+    },
+    quickMenu: {
+      addQuickLink: 'Add Quick Link',
+      linkName: 'Link Name',
+      linkUrl: 'Link URL',
+      add: 'Add',
+      cancel: 'Cancel',
+      delete: 'Delete',
+    },
   },
   ko: {
     options: {
@@ -156,6 +184,20 @@ const translations: Record<Language, Translation> = {
     },
     footer: {
       visitHistory: '방문 기록',
+    },
+    toolbar: {
+      newTab: '새 탭',
+      refresh: '새로고침',
+      muteAll: '모든 탭 음소거',
+      unmuteAll: '모든 탭 음소거 해제',
+    },
+    quickMenu: {
+      addQuickLink: '즐겨찾기 추가',
+      linkName: '링크 이름',
+      linkUrl: '링크 URL',
+      add: '추가',
+      cancel: '취소',
+      delete: '삭제',
     },
   },
 };

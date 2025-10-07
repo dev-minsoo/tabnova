@@ -5,6 +5,8 @@ import { Body } from '../../components/Body';
 import { Footer } from '../../components/Footer';
 import { BookmarkList } from '../../components/BookmarkList';
 import { HistoryList } from '../../components/HistoryList';
+import ToolBar from '../../components/ToolBar';
+import QuickMenu from '../../components/QuickMenu';
 import { applyTheme, applyAccentColor, getSettings } from '../../utils/settings';
 import { getTranslation, Translation } from '../../utils/i18n';
 
@@ -252,6 +254,9 @@ function SidePanel() {
         onSearchKeyDown={handleSearchKeyDown}
         translation={translation}
       />
+
+      <ToolBar />
+      <QuickMenu />
 
       {renderContent()}
 

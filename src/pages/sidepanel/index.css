@@ -65,3 +65,115 @@ input::placeholder {
 .dark img[src*="settings"] {
   filter: brightness(1.5) contrast(1.2);
 }
+
+/* ToolBar styles */
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background-color: var(--bg-primary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* QuickMenu styles */
+.quick-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 16px;
+  background-color: var(--bg-primary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.quick-menu-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.quick-link-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.quick-link-button {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 12px;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.quick-link-button:hover {
+  background-color: var(--hover-bg);
+  border-color: var(--accent-color);
+}
+
+.quick-link-button svg {
+  width: 16px;
+  height: 16px;
+  color: var(--text-secondary);
+}
+
+.quick-link-add-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
+
+.quick-link-add-form input {
+  padding: 8px 12px;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 13px;
+  outline: none;
+}
+
+.quick-link-add-form input:focus {
+  border-color: var(--accent-color);
+}
+
+.add-form-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.add-form-buttons button {
+  flex: 1;
+  padding: 6px 12px;
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: opacity 0.2s ease;
+}
+
+.add-form-buttons button:hover {
+  opacity: 0.9;
+}
+
+.add-form-buttons button:last-child {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.add-form-buttons button:last-child:hover {
+  background-color: var(--hover-bg);
+}
