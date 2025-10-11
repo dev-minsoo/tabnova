@@ -13,6 +13,7 @@ import FolderIcon from '@mui/icons-material/Folder';
 import PublicOutlinedIcon from '@mui/icons-material/PublicOutlined';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import VolumeOffIcon from '@mui/icons-material/VolumeOff';
+import StarIcon from '@mui/icons-material/Star';
 import { SvgIconProps } from '@mui/material/SvgIcon';
 
 type TooltipPosition = 'top' | 'bottom' | 'left' | 'right';
@@ -39,6 +40,7 @@ const iconMap: Record<string, React.ComponentType<SvgIconProps>> = {
   folder: FolderIcon,
   volumeUp: VolumeUpIcon,
   volumeOff: VolumeOffIcon,
+  star: StarIcon,
 };
 
 function getTooltipPosition(rect: DOMRect, position: TooltipPosition, tooltipText: string) {

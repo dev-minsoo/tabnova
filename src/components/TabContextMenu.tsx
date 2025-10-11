@@ -67,7 +67,45 @@ export function TabContextMenu({ isOpen, onClose, tab, x, y, translation }: TabC
     onClose();
   };
 
+  const handlePinToFavorites = async () => {
+    if (tab.url && tab.title) {
+      try {
+        const result = await chrome.storage.sync.get(['quickLinks']);
+        const quickLinks = result.quickLinks || [];
+
+        // Get favicon URL - prefer tab's favIconUrl first
+        let faviconUrl = tab.favIconUrl;
+
+        // If tab doesn't have favIconUrl, use Google Favicon API
+        if (!faviconUrl && tab.url) {
+          try {
+            const url = new URL(tab.url);
+            // Try with full hostname first (e.g., nid.naver.com)
+            faviconUrl = `https://www.google.com/s2/favicons?domain=${url.hostname}&sz=64`;
+          } catch (e) {
+            console.error('Invalid URL:', tab.url);
+          }
+        }
+
+        const newLink = {
+          id: Date.now().toString(),
+          name: tab.title,
+          url: tab.url,
+          faviconUrl: faviconUrl,
+        };
+
+        console.log('Saving quick link:', newLink); // Debug log
+
+        await chrome.storage.sync.set({ quickLinks: [...quickLinks, newLink] });
+      } catch (error) {
+        console.error('Error pinning to favorites:', error);
+      }
+    }
+    onClose();
+  };
+
   const menuItems = [
+    { id: 'pinToFavorites', label: translation.tab.pinToFavorites, icon: 'star', onClick: handlePinToFavorites },
     { id: 'close', label: translation.tab.closeTab, icon: 'close', onClick: handleCloseTab },
     { id: 'closeOthers', label: translation.tab.closeOtherTabs, icon: 'close', onClick: handleCloseOtherTabs },
     { id: 'duplicate', label: translation.tab.duplicateTab, icon: 'tabs', onClick: handleDuplicateTab },

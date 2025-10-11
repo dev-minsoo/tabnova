@@ -47,6 +47,7 @@ export interface Translation {
     newTab: string;
     muteTab: string;
     unmuteTab: string;
+    pinToFavorites: string;
   };
   footer: {
     visitHistory: string;
@@ -64,6 +65,10 @@ export interface Translation {
     add: string;
     cancel: string;
     delete: string;
+    remove: string;
+    copyLink: string;
+    edit: string;
+    save: string;
   };
 }
 
@@ -115,6 +120,7 @@ const translations: Record<Language, Translation> = {
       newTab: 'New tab',
       muteTab: 'Mute tab',
       unmuteTab: 'Unmute tab',
+      pinToFavorites: 'Pin to Favorites',
     },
     footer: {
       visitHistory: 'Visit History',
@@ -132,6 +138,10 @@ const translations: Record<Language, Translation> = {
       add: 'Add',
       cancel: 'Cancel',
       delete: 'Delete',
+      remove: 'Remove',
+      copyLink: 'Copy Link',
+      edit: 'Edit',
+      save: 'Save',
     },
   },
   ko: {
@@ -181,6 +191,7 @@ const translations: Record<Language, Translation> = {
       newTab: '새 탭 만들기',
       muteTab: '음소거',
       unmuteTab: '음소거 해제',
+      pinToFavorites: '즐겨찾기 고정',
     },
     footer: {
       visitHistory: '방문 기록',
@@ -198,6 +209,10 @@ const translations: Record<Language, Translation> = {
       add: '추가',
       cancel: '취소',
       delete: '삭제',
+      remove: '제거',
+      copyLink: '링크 복사',
+      edit: '편집',
+      save: '저장',
     },
   },
 };
