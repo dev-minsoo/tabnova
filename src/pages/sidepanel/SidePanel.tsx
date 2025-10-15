@@ -245,7 +245,7 @@ function SidePanel() {
   return (
     <div
       className="h-full overflow-x-hidden w-full max-w-full relative flex flex-col"
-      style={{ backgroundColor: 'var(--bg-secondary)' }}
+      style={{ backgroundColor: 'var(--bg-primary)' }}
     >
       <Header
         searchQuery={searchQuery}

@@ -253,7 +253,7 @@ const QuickMenu: React.FC = () => {
       )}
 
       {editingLink && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
           <div className="bg-white dark:bg-gray-800 rounded-lg p-4 w-80">
             <h3 className="text-lg font-medium mb-3 text-gray-900 dark:text-gray-100">{translation.quickMenu.edit}</h3>
             <input
@@ -272,13 +272,14 @@ const QuickMenu: React.FC = () => {
             />
             <div className="flex justify-end gap-2">
               <button
-                className="px-4 py-2 text-sm text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
+                className="px-4 py-2 text-sm text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded border border-gray-300 dark:border-gray-600"
                 onClick={() => setEditingLink(null)}
               >
                 {translation.quickMenu.cancel}
               </button>
               <button
-                className="px-4 py-2 text-sm bg-blue-500 text-white rounded hover:bg-blue-600"
+                className="px-4 py-2 text-sm text-white rounded"
+                style={{ backgroundColor: 'var(--accent-color, #3b82f6)' }}
                 onClick={() => {
                   const name = (document.getElementById('edit-name') as HTMLInputElement).value;
                   const url = (document.getElementById('edit-url') as HTMLInputElement).value;
