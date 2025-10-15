@@ -14,6 +14,9 @@ import PublicOutlinedIcon from '@mui/icons-material/PublicOutlined';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 import StarIcon from '@mui/icons-material/Star';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { SvgIconProps } from '@mui/material/SvgIcon';
 
 type TooltipPosition = 'top' | 'bottom' | 'left' | 'right';
@@ -41,6 +44,9 @@ const iconMap: Record<string, React.ComponentType<SvgIconProps>> = {
   volumeUp: VolumeUpIcon,
   volumeOff: VolumeOffIcon,
   star: StarIcon,
+  delete: DeleteOutlineIcon,
+  edit: EditOutlinedIcon,
+  copy: ContentCopyIcon,
 };
 
 function getTooltipPosition(rect: DOMRect, position: TooltipPosition, tooltipText: string) {

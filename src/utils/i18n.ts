@@ -65,10 +65,13 @@ export interface Translation {
     add: string;
     cancel: string;
     delete: string;
-    remove: string;
     copyLink: string;
     edit: string;
     save: string;
+    deleted: string;
+    edited: string;
+    copied: string;
+    pinned: string;
   };
 }
 
@@ -138,10 +141,13 @@ const translations: Record<Language, Translation> = {
       add: 'Add',
       cancel: 'Cancel',
       delete: 'Delete',
-      remove: 'Remove',
       copyLink: 'Copy Link',
       edit: 'Edit',
       save: 'Save',
+      deleted: 'Deleted from QuickMenu',
+      edited: 'QuickMenu edited',
+      copied: 'Link copied',
+      pinned: 'Pinned to QuickMenu',
     },
   },
   ko: {
@@ -209,10 +215,13 @@ const translations: Record<Language, Translation> = {
       add: '추가',
       cancel: '취소',
       delete: '삭제',
-      remove: '제거',
       copyLink: '링크 복사',
       edit: '편집',
       save: '저장',
+      deleted: '빠른메뉴에서 삭제됨',
+      edited: '빠른메뉴 편집됨',
+      copied: '링크 복사됨',
+      pinned: '빠른 메뉴에 고정됨',
     },
   },
 };

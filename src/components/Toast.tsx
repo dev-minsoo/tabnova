@@ -87,13 +87,14 @@ function ToastComponent({ toast, onRemove }: ToastComponentProps) {
   return (
     <div
       className={`
-        relative flex w-full max-w-sm items-center space-x-3 rounded-lg border p-4 shadow-lg
+        relative flex w-full max-w-md items-center space-x-3 rounded-lg border p-4 shadow-lg
         ${getBorderColor()}
         ${isExiting ? 'toast-exit' : 'toast-enter'}
       `}
       style={{
         backgroundColor: 'var(--bg-primary)',
         borderColor: 'var(--border-color)',
+        minWidth: '320px',
       }}
     >
       {/* Icon */}
@@ -149,13 +150,18 @@ function ToastComponent({ toast, onRemove }: ToastComponentProps) {
 interface ToastContainerProps {
   toasts: Toast[];
   onRemove: (id: string) => void;
+  position?: 'bottom-right' | 'bottom-center';
 }
 
-export function ToastContainer({ toasts, onRemove }: ToastContainerProps) {
+export function ToastContainer({ toasts, onRemove, position = 'bottom-right' }: ToastContainerProps) {
   if (toasts.length === 0) return null;
 
+  const positionClasses = position === 'bottom-center'
+    ? 'fixed bottom-4 left-1/2 -translate-x-1/2 z-50 flex flex-col space-y-2'
+    : 'fixed bottom-4 right-4 z-50 flex flex-col space-y-2';
+
   return createPortal(
-    <div className="fixed bottom-4 right-4 z-50 flex flex-col space-y-2">
+    <div className={positionClasses}>
       {toasts.map((toast) => (
         <ToastComponent
           key={toast.id}

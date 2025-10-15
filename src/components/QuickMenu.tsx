@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Language } from '@mui/icons-material';
 import { getTranslation, Translation } from '../utils/i18n';
 import { getSettings } from '../utils/settings';
+import { Icon } from './Icon';
+import { useToast, ToastContainer } from './Toast';
 
 function FaviconWithFallback({ faviconUrl, name, url }: { faviconUrl?: string; name: string; url: string }) {
   const [error, setError] = useState(false);
@@ -61,6 +63,7 @@ const QuickMenu: React.FC = () => {
   }>({ isOpen: false, x: 0, y: 0, link: null });
   const [editingLink, setEditingLink] = useState<QuickLink | null>(null);
   const contextMenuRef = React.useRef<HTMLDivElement>(null);
+  const { toasts, removeToast, success } = useToast();
 
   useEffect(() => {
     const loadSettings = async () => {
@@ -150,8 +153,9 @@ const QuickMenu: React.FC = () => {
   };
 
   const handleCopyLink = () => {
-    if (contextMenu.link) {
+    if (contextMenu.link && translation) {
       navigator.clipboard.writeText(contextMenu.link.url);
+      success(translation.quickMenu.copied);
       setContextMenu({ isOpen: false, x: 0, y: 0, link: null });
     }
   };
@@ -164,20 +168,22 @@ const QuickMenu: React.FC = () => {
   };
 
   const handleSaveEdit = (name: string, url: string) => {
-    if (editingLink) {
+    if (editingLink && translation) {
       const updatedLinks = links.map(link =>
         link.id === editingLink.id
           ? { ...link, name, url: url.startsWith('http') ? url : `https://${url}` }
           : link
       );
       saveLinks(updatedLinks);
+      success(translation.quickMenu.edited);
       setEditingLink(null);
     }
   };
 
   const handleRemoveFromMenu = () => {
-    if (contextMenu.link) {
+    if (contextMenu.link && translation) {
       handleDeleteLink(contextMenu.link.id);
+      success(translation.quickMenu.deleted);
       setContextMenu({ isOpen: false, x: 0, y: 0, link: null });
     }
   };
@@ -189,7 +195,7 @@ const QuickMenu: React.FC = () => {
   return (
     <>
       <div className="quick-menu">
-        <div className="quick-menu-links">
+        <div className="quick-menu-links px-3">
           {links.map((link) => (
             <button
               key={link.id}
@@ -211,22 +217,37 @@ const QuickMenu: React.FC = () => {
           style={{ left: `${contextMenu.x}px`, top: `${contextMenu.y}px` }}
         >
           <button
-            className="w-full px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-left"
+            className="w-full flex items-center px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-left"
             onClick={handleRemoveFromMenu}
           >
-            {translation.quickMenu.remove}
+            <Icon
+              name="delete"
+              size={16}
+              className="mr-3 opacity-60"
+            />
+            {translation.quickMenu.delete}
           </button>
           <button
-            className="w-full px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-left"
-            onClick={handleCopyLink}
-          >
-            {translation.quickMenu.copyLink}
-          </button>
-          <button
-            className="w-full px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-left"
+            className="w-full flex items-center px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-left"
             onClick={handleEditLink}
           >
+            <Icon
+              name="edit"
+              size={16}
+              className="mr-3 opacity-60"
+            />
             {translation.quickMenu.edit}
+          </button>
+          <button
+            className="w-full flex items-center px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-left"
+            onClick={handleCopyLink}
+          >
+            <Icon
+              name="copy"
+              size={16}
+              className="mr-3 opacity-60"
+            />
+            {translation.quickMenu.copyLink}
           </button>
         </div>
       )}
@@ -270,6 +291,9 @@ const QuickMenu: React.FC = () => {
           </div>
         </div>
       )}
+
+      {/* Toast Container */}
+      <ToastContainer toasts={toasts} onRemove={removeToast} position="bottom-center" />
     </>
   );
 };
