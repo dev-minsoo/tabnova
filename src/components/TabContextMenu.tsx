@@ -105,10 +105,10 @@ export function TabContextMenu({ isOpen, onClose, tab, x, y, translation }: TabC
   };
 
   const menuItems = [
-    { id: 'pinToFavorites', label: translation.tab.pinToFavorites, icon: 'star', onClick: handlePinToFavorites },
     { id: 'close', label: translation.tab.closeTab, icon: 'close', onClick: handleCloseTab },
     { id: 'closeOthers', label: translation.tab.closeOtherTabs, icon: 'close', onClick: handleCloseOtherTabs },
     { id: 'duplicate', label: translation.tab.duplicateTab, icon: 'tabs', onClick: handleDuplicateTab },
+    { id: 'pinToFavorites', label: translation.tab.pinToFavorites, icon: 'star', onClick: handlePinToFavorites },
   ];
 
   return (
