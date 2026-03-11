@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/banner.svg" alt="TabNova 배너" width="100%" />
+  <img src="docs/banner.png" alt="TabNova 배너" width="100%" />
 </p>
 
 <h1 align="center">TabNova</h1>
