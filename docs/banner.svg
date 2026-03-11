@@ -25,6 +25,6 @@
   <text x="720" y="146" fill="#F8FAFC" font-family="Arial, sans-serif" font-size="60" font-weight="700">TabNova</text>
   <text x="722" y="188" fill="#CBD5E1" font-family="Arial, sans-serif" font-size="22">Vertical Chrome tab manager with search, drag reorder, and quick switching</text>
   <rect x="722" y="234" width="238" height="42" rx="21" fill="#111827" stroke="#475569"/>
-  <text x="748" y="261" fill="#93C5FD" font-family="Menlo, monospace" font-size="17">npm install && npm run build</text>
+  <text x="748" y="261" fill="#93C5FD" font-family="Menlo, monospace" font-size="17">npm install &amp;&amp; npm run build</text>
   <text x="722" y="316" fill="#94A3B8" font-family="Arial, sans-serif" font-size="18">Side panel  •  Live tab sync  •  Drag reorder  •  Alt+B</text>
 </svg>
