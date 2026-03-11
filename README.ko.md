@@ -1,148 +1,97 @@
-# 🚀 TabNova
+<p align="center">
+  <img src="docs/banner.svg" alt="TabNova 배너" width="100%" />
+</p>
 
-크롬 브라우징 경험을 혁신하는 현대적이고 직관적인 세로형 탭 관리자입니다.
+<h1 align="center">TabNova</h1>
 
-![TabNova 스크린샷](./screenshot.png)
+<p align="center">
+  빠른 전환, 검색, 드래그 정렬에 초점을 둔 Chrome 세로형 탭 매니저입니다.
+</p>
 
-## ✨ 주요 기능
+<p align="center">
+  <a href="#설치"><img alt="React" src="https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=111827"></a>
+  <a href="#설치"><img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white"></a>
+  <a href="#설치"><img alt="Chrome Extension" src="https://img.shields.io/badge/Chrome-Extension-4285F4?logo=googlechrome&logoColor=white"></a>
+</p>
 
-### 🎯 스마트 탭 관리
-- **세로형 레이아웃** - 깔끔한 사이드바에서 모든 탭을 한눈에 확인
-- **드래그 앤 드롭** - 탭을 끌어서 쉽게 순서 변경
-- **원클릭 전환** - 탭을 클릭하면 즉시 해당 페이지로 이동
-- **빠른 닫기** - 마우스 호버 시 X 버튼으로 간편하게 탭 닫기
+<p align="center">
+  <code>npm install && npm run build</code>
+</p>
 
-### 🔍 강력한 검색 기능
-- **실시간 필터링** - 입력하는 즉시 탭을 찾아서 표시
-- **검색 하이라이팅** - 일치하는 텍스트를 강조 표시
-- **새 탭 검색** - 엔터키나 전송 아이콘을 클릭하여 새 탭에서 검색
-- **스마트 입력** - 한국어를 포함한 모든 언어 완벽 지원
+TabNova는 기본 가로 탭 바 대신 Chrome 사이드패널 안에서 탭을 검색, 정렬, 전환, 닫기까지 처리할 수 있도록 만든 확장입니다.
 
-### ⚡ 키보드 단축키
-- **Alt+B (Option+B)** - TabNova 사이드바를 즉시 열기/포커스
+## 한눈에 보기
 
-### 🎨 세련된 인터페이스
-- **스마트 툴팁** - 화면을 벗어나지 않는 상황 인식 도움말
-- **부드러운 애니메이션** - 유려한 전환 효과와 호버 이펙트
-- **반응형 디자인** - 어떤 사이드바 너비에서도 완벽하게 작동
-- **깔끔한 타이포그래피** - 읽기 쉬운 탭 제목과 URL 표시
+- 현재 창의 탭 상태를 실시간으로 반영하는 세로형 탭 목록
+- 드래그 앤 드롭 재정렬, 빠른 닫기, 즉시 전환 지원
+- 검색, 북마크, 방문 기록, 설정을 한 사이드패널 흐름에 통합
 
-## 🚀 설치 방법
+## 왜 TabNova인가
 
-### Chrome 웹 스토어에서 설치 (곧 출시)
-1. Chrome 웹 스토어 방문
-2. "TabNova" 검색
-3. "Chrome에 추가" 클릭
+- 브라우징 세션이 길어질수록 기본 가로 탭 바는 한계가 분명해집니다
+- 사이드패널은 탭 상태를 더 읽기 쉽게 만들고 조작 비용을 줄여줍니다
+- 검색과 단축키를 보조 기능이 아니라 탐색 흐름의 일부로 다룹니다
 
-### 수동 설치 (개발용)
-1. 이 저장소를 복제:
-   ```bash
-   git clone https://github.com/your-username/tabnova.git
-   cd tabnova
-   ```
+## 핵심 기능
 
-2. 의존성 설치:
-   ```bash
-   npm install
-   ```
+- 세로형 사이드패널 탭 뷰
+- 실시간 탭 필터링
+- 드래그 앤 드롭 재정렬
+- 원클릭 전환과 hover 기반 빠른 닫기
+- 북마크 / 방문 기록 뷰
+- 테마, 강조색, 언어 설정
+- `Alt+B` / `Option+B` 단축키 지원
 
-3. 확장 프로그램 빌드:
-   ```bash
-   npm run build
-   ```
+## 설치
 
-4. Chrome에 로드:
-   - Chrome을 열고 `chrome://extensions/` 이동
-   - "개발자 모드" 활성화 (우측 상단)
-   - "압축해제된 확장 프로그램을 로드합니다" 클릭
-   - `dist` 폴더 선택
+### 요구사항
 
-## 🎮 사용 방법
-
-### TabNova 열기
-- **키보드**: `Alt+B` (Mac에서는 `Option+B`) 누르기
-- **아이콘**: 툴바의 TabNova 아이콘 클릭
-- **우클릭**: 아무 곳이나 우클릭 후 "TabNova 열기" 선택
-
-### 탭 관리
-- **탭 전환**: 목록의 탭을 클릭
-- **탭 닫기**: 탭에 마우스를 올리고 X 버튼 클릭
-- **탭 순서 변경**: 탭을 위아래로 드래그하여 순서 조정
-- **새 탭 만들기**: 하단의 + 버튼 클릭
-
-### 검색 기능
-- **탭 찾기**: 검색창에 입력하여 제목이나 URL로 필터링
-- **검색 지우기**: 검색창의 X 버튼 클릭
-- **웹 검색**: 검색어 입력 후 엔터키 또는 전송 아이콘 클릭
-
-## 🛠️ 개발
-
-### 필수 요구사항
 - Node.js 18+
-- npm 또는 yarn
+- 개발자 모드를 사용할 수 있는 Chrome
 
-### 설정
+### 빌드
+
 ```bash
-# 의존성 설치
 npm install
-
-# 개발 서버 시작
-npm run dev
-
-# 프로덕션 빌드
 npm run build
+```
 
-# 타입 검사
+`chrome://extensions`에서 **압축해제된 확장 프로그램 로드**로 `dist/` 폴더를 선택하면 됩니다.
+
+## 사용법
+
+- 툴바 아이콘 또는 `Alt+B`로 사이드패널을 엽니다
+- 제목이나 URL로 탭을 필터링합니다
+- 드래그로 탭 순서를 바꿉니다
+- 검색창에서 새 웹 검색을 바로 엽니다
+- 탭, 북마크, 방문 기록을 패널 안에서 오갑니다
+
+## 개발
+
+```bash
+npm run dev
 npm run type-check
+npm run build
 ```
 
-### 프로젝트 구조
+## 기여
+
+PR 전에는 다음을 확인해 주세요.
+
+```bash
+npm run type-check
+npm run build
 ```
-src/
-├── components/          # 재사용 가능한 React 컴포넌트
-├── pages/sidepanel/     # 메인 사이드패널 인터페이스
-├── public/icons/        # 확장 프로그램 아이콘
-└── background.ts        # Chrome 확장 프로그램 서비스 워커
-```
 
-## 🤝 기여하기
+이슈에는 아래 정보를 포함해 주세요.
 
-기여를 환영합니다! Pull Request를 자유롭게 제출해 주세요. 주요 변경사항의 경우, 먼저 이슈를 열어 논의해 주시기 바랍니다.
+- Chrome 버전과 OS
+- 재현 단계
+- 기대 동작과 실제 동작
+- 탭 / 북마크 / 방문 기록 / 설정 중 어느 영역에서 발생했는지
 
-### 개발 가이드라인
-1. 기존 코드 스타일을 따라주세요
-2. 새로운 기능에 대한 TypeScript 타입을 추가해 주세요
-3. 변경사항을 철저히 테스트해 주세요
-4. 필요시 문서를 업데이트해 주세요
+권장 커밋 프리픽스: `feat`, `fix`, `docs`, `refactor`, `test`, `chore`
 
-## 📝 라이선스
+## 라이선스
 
-이 프로젝트는 MIT 라이선스 하에 있습니다 - 자세한 내용은 [LICENSE](LICENSE) 파일을 참조하세요.
-
-## 🐛 버그 신고
-
-버그를 발견하셨나요? GitHub에서 다음 정보와 함께 이슈를 열어주세요:
-- Chrome 버전
-- 문제 재현 단계
-- 예상 동작 vs 실제 동작
-- 가능하다면 스크린샷
-
-## 💡 기능 제안
-
-새로운 기능에 대한 아이디어가 있으시나요? "enhancement" 라벨로 이슈를 열어주세요!
-
-## 🙏 감사의 말
-
-- React와 TypeScript로 ❤️를 담아 제작
-- [@dnd-kit](https://dndkit.com/)으로 구현된 드래그 앤 드롭 기능
-- 명확성과 일관성을 위해 디자인된 아이콘
-- 현대적인 생산성 도구에서 영감을 받음
-
----
-
-**TabNova** - 오늘부터 탭 관리 경험을 혁신하세요! 🌟
-
-## 🌐 다른 언어
-
-- [English](README.md)
-- [한국어](README.ko.md)
+ISC

@@ -1,151 +1,97 @@
-# 🚀 TabNova
+<p align="center">
+  <img src="docs/banner.svg" alt="TabNova banner" width="100%" />
+</p>
 
-A modern, intuitive vertical tab manager for Chrome that transforms your browsing experience.
+<h1 align="center">TabNova</h1>
 
-![TabNova Screenshot](./screenshot.png)
+<p align="center">
+  Vertical Chrome tab manager focused on fast switching, filtering, and drag-based reordering.
+</p>
 
-## ✨ Features
+<p align="center">
+  <a href="#installation"><img alt="React" src="https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=111827"></a>
+  <a href="#installation"><img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white"></a>
+  <a href="#installation"><img alt="Chrome Extension" src="https://img.shields.io/badge/Chrome-Extension-4285F4?logo=googlechrome&logoColor=white"></a>
+</p>
 
-### 🎯 Smart Tab Management
-- **Vertical layout** - See all your tabs at a glance in a clean sidebar
-- **Drag & drop** - Easily reorder tabs by dragging them
-- **One-click switching** - Click any tab to instantly navigate
-- **Quick close** - X button on hover for easy tab closure
+<p align="center">
+  <code>npm install && npm run build</code>
+</p>
 
-### 🔍 Powerful Search
-- **Real-time filtering** - Find tabs instantly as you type
-- **Search highlighting** - Matching text is highlighted in results
-- **New tab search** - Press Enter or click send icon to search in a new tab
-- **Smart input** - Full support for Korean and other languages
+TabNova moves tab management into the Chrome side panel so you can search, reorder, switch, and close tabs without relying on the default horizontal tab bar.
 
-### ⚡ Keyboard Shortcuts
-- **Alt+B (Option+B)** - Open/focus TabNova sidebar instantly
+## At a Glance
 
-### 🎨 Polished Interface
-- **Smart tooltips** - Context-aware help that never gets cut off
-- **Smooth animations** - Fluid transitions and hover effects
-- **Responsive design** - Works perfectly at any sidebar width
-- **Clean typography** - Easy to read tab titles and URLs
+- Vertical tab list with live tab updates from the current window
+- Drag-and-drop reordering plus fast close and instant switching
+- Search, bookmark, history, and settings views inside one side-panel workflow
 
-## 🚀 Installation
+## Why TabNova
 
-### From Chrome Web Store (Coming Soon)
-1. Visit the Chrome Web Store
-2. Search for "TabNova"
-3. Click "Add to Chrome"
+- Horizontal tabs stop scaling once a browsing session gets dense
+- The side panel makes tab state easier to scan and manipulate
+- Search and shortcuts are treated as part of navigation, not secondary utilities
 
-### Manual Installation (Development)
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/your-username/tabnova.git
-   cd tabnova
-   ```
+## Core Features
 
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
+- Vertical side-panel tab view
+- Real-time tab filtering
+- Drag-and-drop reordering
+- One-click switching and close on hover
+- Bookmark and history views
+- Theme, accent color, and language settings
+- `Alt+B` / `Option+B` shortcut support
 
-3. Build the extension:
-   ```bash
-   npm run build
-   ```
+## Installation
 
-4. Load in Chrome:
-   - Open Chrome and go to `chrome://extensions/`
-   - Enable "Developer mode" (top right)
-   - Click "Load unpacked"
-   - Select the `dist` folder
+### Requirements
 
-## 🎮 How to Use
-
-### Opening TabNova
-- **Keyboard**: Press `Alt+B` (or `Option+B` on Mac)
-- **Icon**: Click the TabNova icon in your toolbar
-- **Right-click**: Right-click anywhere and select "Open TabNova"
-
-### Managing Tabs
-- **Switch tabs**: Click on any tab in the list
-- **Close tabs**: Hover over a tab and click the X button
-- **Reorder tabs**: Drag tabs up or down to reorder them
-- **Create new tab**: Click the + button at the bottom
-
-### Searching
-- **Find tabs**: Type in the search box to filter by title or URL
-- **Clear search**: Click the X button in the search box
-- **Search web**: Type your query and press Enter or click the send icon
-
-## 🛠️ Development
-
-### Prerequisites
 - Node.js 18+
-- npm or yarn
+- Chrome with extension developer mode enabled
 
-### Setup
+### Build
+
 ```bash
-# Install dependencies
 npm install
-
-# Start development server
-npm run dev
-
-# Build for production
 npm run build
-
-# Type checking
-npm run typecheck
-
-# Linting
-npm run lint
 ```
 
-### Project Structure
+Load the generated `dist/` folder from `chrome://extensions` using **Load unpacked**.
+
+## Usage
+
+- Open the side panel with the toolbar icon or `Alt+B`
+- Filter tabs by title or URL
+- Drag tabs to reorder them
+- Open a new web search from the search field
+- Move between tabs, bookmarks, and history without leaving the panel
+
+## Development
+
+```bash
+npm run dev
+npm run type-check
+npm run build
 ```
-src/
-├── components/          # Reusable React components
-├── pages/sidepanel/     # Main sidepanel interface
-├── public/icons/        # Extension icons
-└── background.ts        # Chrome extension service worker
+
+## Contributing
+
+Before opening a PR:
+
+```bash
+npm run type-check
+npm run build
 ```
 
-## 🤝 Contributing
+Issue reports should include:
 
-We welcome contributions! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
-
-### Development Guidelines
-1. Follow the existing code style
-2. Add TypeScript types for new features
-3. Test your changes thoroughly
-4. Update documentation as needed
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🐛 Bug Reports
-
-Found a bug? Please open an issue on GitHub with:
-- Your Chrome version
-- Steps to reproduce the issue
+- Chrome version and OS
+- Reproduction steps
 - Expected vs actual behavior
-- Screenshots if applicable
+- Whether the problem affects tabs, bookmarks, history, or settings
 
-## 💡 Feature Requests
+Recommended commit prefixes: `feat`, `fix`, `docs`, `refactor`, `test`, `chore`
 
-Have an idea for a new feature? We'd love to hear it! Open an issue with the "enhancement" label.
+## License
 
-## 🙏 Acknowledgments
-
-- Built with ❤️ using React and TypeScript
-- Drag & drop powered by [@dnd-kit](https://dndkit.com/)
-- Icons designed for clarity and consistency
-- Inspired by modern productivity tools
-
----
-
-**TabNova** - Transform your tab management experience today! 🌟
-
-## 🌐 Other Languages
-
-- [English](README.md)
-- [한국어](README.ko.md)
+ISC

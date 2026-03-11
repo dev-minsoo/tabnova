@@ -1,0 +1,30 @@
+<svg width="1400" height="420" viewBox="0 0 1400 420" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">TabNova banner</title>
+  <desc id="desc">Vertical Chrome tab manager with search and drag reorder</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1400" y2="420" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B1020"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+  </defs>
+  <rect width="1400" height="420" fill="url(#bg)"/>
+  <circle cx="240" cy="80" r="120" fill="#6366F1" opacity="0.15"/>
+  <circle cx="1220" cy="320" r="140" fill="#38BDF8" opacity="0.1"/>
+  <rect x="92" y="74" width="586" height="272" rx="28" fill="#0F172A" stroke="#334155"/>
+  <rect x="126" y="112" width="520" height="40" rx="20" fill="#111827" stroke="#475569"/>
+  <rect x="154" y="125" width="132" height="14" rx="7" fill="#E2E8F0"/>
+  <rect x="130" y="174" width="154" height="132" rx="22" fill="#111827" stroke="#334155"/>
+  <rect x="308" y="174" width="154" height="132" rx="22" fill="#111827" stroke="#6366F1"/>
+  <rect x="486" y="174" width="154" height="132" rx="22" fill="#111827" stroke="#334155"/>
+  <rect x="156" y="198" width="72" height="12" rx="6" fill="#E2E8F0"/>
+  <rect x="156" y="226" width="96" height="10" rx="5" fill="#64748B"/>
+  <rect x="334" y="198" width="82" height="12" rx="6" fill="#EEF2FF"/>
+  <rect x="334" y="226" width="96" height="10" rx="5" fill="#818CF8"/>
+  <rect x="512" y="198" width="72" height="12" rx="6" fill="#E2E8F0"/>
+  <rect x="512" y="226" width="98" height="10" rx="5" fill="#64748B"/>
+  <text x="720" y="146" fill="#F8FAFC" font-family="Arial, sans-serif" font-size="60" font-weight="700">TabNova</text>
+  <text x="722" y="188" fill="#CBD5E1" font-family="Arial, sans-serif" font-size="22">Vertical Chrome tab manager with search, drag reorder, and quick switching</text>
+  <rect x="722" y="234" width="238" height="42" rx="21" fill="#111827" stroke="#475569"/>
+  <text x="748" y="261" fill="#93C5FD" font-family="Menlo, monospace" font-size="17">npm install && npm run build</text>
+  <text x="722" y="316" fill="#94A3B8" font-family="Arial, sans-serif" font-size="18">Side panel  •  Live tab sync  •  Drag reorder  •  Alt+B</text>
+</svg>
