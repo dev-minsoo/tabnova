@@ -26,6 +26,20 @@ TabNova moves tab management into the Chrome side panel so you can search, reord
 - Drag-and-drop reordering plus fast close and instant switching
 - Search, bookmark, history, and settings views inside one side-panel workflow
 
+## Screenshots
+
+### Side Panel
+
+![TabNova side panel with tab search and navigation](docs/tabnova1.png)
+
+Browse open tabs in a vertical list, filter them instantly, and keep related work grouped inside the Chrome side panel.
+
+### Settings
+
+![TabNova settings view with language, theme, and accent options](docs/tabnova2.png)
+
+Adjust language, color mode, accent color, and extension behavior from a dedicated settings view.
+
 ## Why TabNova
 
 - Horizontal tabs stop scaling once a browsing session gets dense

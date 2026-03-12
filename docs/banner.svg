@@ -23,8 +23,11 @@
   <rect x="512" y="198" width="72" height="12" rx="6" fill="#E2E8F0"/>
   <rect x="512" y="226" width="98" height="10" rx="5" fill="#64748B"/>
   <text x="720" y="146" fill="#F8FAFC" font-family="Arial, sans-serif" font-size="60" font-weight="700">TabNova</text>
-  <text x="722" y="188" fill="#CBD5E1" font-family="Arial, sans-serif" font-size="22">Vertical Chrome tab manager with search, drag reorder, and quick switching</text>
-  <rect x="722" y="234" width="238" height="42" rx="21" fill="#111827" stroke="#475569"/>
-  <text x="748" y="261" fill="#93C5FD" font-family="Menlo, monospace" font-size="17">npm install &amp;&amp; npm run build</text>
-  <text x="722" y="316" fill="#94A3B8" font-family="Arial, sans-serif" font-size="18">Side panel  •  Live tab sync  •  Drag reorder  •  Alt+B</text>
+  <text x="722" y="188" fill="#CBD5E1" font-family="Arial, sans-serif" font-size="22">
+    <tspan x="722" dy="0">Vertical Chrome tab manager with search,</tspan>
+    <tspan x="722" dy="30">drag reorder, and quick switching</tspan>
+  </text>
+  <rect x="722" y="250" width="330" height="42" rx="21" fill="#111827" stroke="#475569"/>
+  <text x="748" y="277" fill="#93C5FD" font-family="Menlo, monospace" font-size="17">npm install &amp;&amp; npm run build</text>
+  <text x="722" y="332" fill="#94A3B8" font-family="Arial, sans-serif" font-size="18">Side panel  •  Live tab sync  •  Drag reorder  •  Alt+B</text>
 </svg>
